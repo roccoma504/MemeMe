@@ -20,8 +20,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Constants.
     var imagePicker = UIImagePickerController()
     
-    // Variables
-    var combinedImage = UIImage!()
+    var memeObject = MemeObject()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,9 +100,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
     
+    //#MARK Meme subprograms
+    
     // Defines a function that returns UIImage with the
     // UILabels embeded in int.
-    func generateMemedImage() -> UIImage {
+    func generatememeObject() -> UIImage {
         
         // Hide toolbar and navbar.
         self.navigationController?.toolbar.hidden = true
@@ -112,7 +113,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
-        let memedImage : UIImage =
+        let memeObject : UIImage =
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -120,7 +121,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.navigationController?.toolbar.hidden = true
         self.navigationController?.navigationBar.hidden = true;
         
-        return memedImage
+        return memeObject
+    }
+    
+    // Save the meme obeject and then retrieve it.
+    func generateMeme() -> MemeObject {
+        memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!, originalImage: memeImage.image!, memeImage: self.generatememeObject())
+        return memeObject.getMeme()
     }
     
     //#MARK IBActions
@@ -151,7 +158,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // If the image is none nil then pass the image along while performing
         // the segue. If there is no image then just perform the segue.
         if (memeImage.image != nil) {
-            self.performSegueWithIdentifier("cancelPressSegue", sender: MemeObject(topText: self.topLabel.text!, bottomText: self.bottomLabel.text!, originalImage: self.memeImage.image!, memeImage: generateMemedImage()))
+            self.performSegueWithIdentifier("cancelPressSegue", sender: memeObject)
         }
         else
         {

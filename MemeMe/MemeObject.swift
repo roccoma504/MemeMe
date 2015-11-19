@@ -17,11 +17,18 @@ class MemeObject: NSObject {
     var originalImage: UIImage!
     var memeImage: UIImage!
     
-    // Define an init subprogram.
-    init(topText: String, bottomText: String, originalImage: UIImage, memeImage: UIImage) {
+    override init() {
+        super.init()
+    }
+    
+    func saveMeme (topText: String, bottomText: String, originalImage: UIImage, memeImage: UIImage) {
         self.topText = topText
         self.bottomText = bottomText
         self.originalImage = originalImage
         self.memeImage = memeImage
-    }    
+    }
+    
+    func getMeme() -> MemeObject {
+        return self
+    }
 }
