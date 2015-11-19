@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -74,9 +73,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-kx-bVt">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="qmS-kx-bVt" secondAttribute="height" multiplier="50:41" id="8r1-Qg-bA8"/>
-                                </constraints>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcS-Qc-Xq9">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
@@ -97,38 +93,38 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="2Bf-lI-lNJ"/>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCK-lq-T33">
-                                <rect key="frame" x="20" y="526" width="560" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCK-lq-T33">
+                                <rect key="frame" x="269" y="526" width="63" height="17"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjU-3W-Kz6">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjU-3W-Kz6">
                                 <rect key="frame" x="20" y="64" width="560" height="30"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="afO-d2-zaq"/>
+                                    <constraint firstAttribute="height" constant="30" id="5MO-sf-aix"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="centerX" secondItem="qmS-kx-bVt" secondAttribute="centerX" id="2iV-mN-Obg"/>
-                            <constraint firstItem="XCK-lq-T33" firstAttribute="top" secondItem="qmS-kx-bVt" secondAttribute="bottom" constant="-30" id="FLM-Lm-iit"/>
-                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="bottom" secondItem="0yg-PB-h5n" secondAttribute="top" id="NE1-Xy-blK"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="centerY" secondItem="rP9-3Z-77C" secondAttribute="centerY" constant="10" id="TYi-en-4gM"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="leading" secondItem="hcS-Qc-Xq9" secondAttribute="leading" id="YIp-Af-fUN"/>
-                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="top" secondItem="mys-s1-8wR" secondAttribute="bottom" id="amw-dG-UU9"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="top" secondItem="mys-s1-8wR" secondAttribute="bottom" id="dr6-bN-WqD"/>
-                            <constraint firstItem="XCK-lq-T33" firstAttribute="centerX" secondItem="qmS-kx-bVt" secondAttribute="centerX" id="jFs-jB-KJf"/>
-                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leading" id="jk6-0f-kiZ"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="centerX" secondItem="rP9-3Z-77C" secondAttribute="centerX" id="kz7-HV-QnV"/>
-                            <constraint firstAttribute="trailing" secondItem="hcS-Qc-Xq9" secondAttribute="trailing" id="vjt-Im-e6F"/>
-                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leadingMargin" id="x7E-c2-RS9"/>
+                            <constraint firstItem="XCK-lq-T33" firstAttribute="centerX" secondItem="tjU-3W-Kz6" secondAttribute="centerX" id="5DY-2P-hVD"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="trailing" secondItem="qmS-kx-bVt" secondAttribute="trailing" id="6dw-Zh-XBV"/>
+                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leadingMargin" id="CsI-wK-aTa"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="top" secondItem="XCK-lq-T33" secondAttribute="bottom" constant="13" id="E0b-by-bnD"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="bottom" secondItem="0yg-PB-h5n" secondAttribute="top" id="G0V-So-Pom"/>
+                            <constraint firstAttribute="trailing" secondItem="hcS-Qc-Xq9" secondAttribute="trailing" id="XI7-47-iyT"/>
+                            <constraint firstItem="XCK-lq-T33" firstAttribute="centerX" secondItem="hcS-Qc-Xq9" secondAttribute="centerX" id="ZaJ-St-Dsh"/>
+                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="top" secondItem="mys-s1-8wR" secondAttribute="bottom" id="aDy-HO-Z1y"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="leading" secondItem="qmS-kx-bVt" secondAttribute="leading" id="k63-A3-chm"/>
+                            <constraint firstItem="qmS-kx-bVt" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leading" id="ubq-l3-7te"/>
+                            <constraint firstItem="qmS-kx-bVt" firstAttribute="top" secondItem="tjU-3W-Kz6" secondAttribute="top" id="vr1-E5-fMP"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="top" secondItem="qmS-kx-bVt" secondAttribute="bottom" id="yCu-MF-5In"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uFB-0U-tM8">
@@ -144,6 +140,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityButton" destination="XCY-iQ-y7w" id="rVQ-BR-aNH"/>
                         <outlet property="bottomLabel" destination="XCK-lq-T33" id="Bun-5v-HjZ"/>
                         <outlet property="cameraButton" destination="mof-PC-UTb" id="Zxq-ID-igL"/>
                         <outlet property="memeImage" destination="qmS-kx-bVt" id="sOB-xL-khw"/>

@@ -23,5 +23,5 @@ class MemeObject: NSObject {
         self.bottomText = bottomText
         self.originalImage = originalImage
         self.memeImage = memeImage
-    }
+    }    
 }
