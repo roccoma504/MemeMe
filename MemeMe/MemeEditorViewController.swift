@@ -18,7 +18,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var bottomLabel: UITextField!
     
     // Constants.
-    let imagePicker = UIImagePickerController()
+    var imagePicker = UIImagePickerController()
     
     // Variables
     var combinedImage = UIImage!()
@@ -127,6 +127,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Defines a function that will show the camera view.
     @IBAction func cameraButtonPress(sender: AnyObject) {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .Camera
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     // Defines a function that will show the image picker view.
