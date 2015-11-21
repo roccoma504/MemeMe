@@ -17,9 +17,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topLabel: UITextField!
     @IBOutlet weak var bottomLabel: UITextField!
     
-    // Constants.
+    // Variables.
+    
+    // Defines an image picker for use by the photo picking functions.
     var imagePicker = UIImagePickerController()
     
+    // Defines a memeobject.
     var memeObject = MemeObject()
     
     override func viewDidLoad() {
@@ -35,17 +38,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         //TODO Add impact font
         // Define a default label object.
-        let defaultLabel = MemeLabelObject(text: "MEME ME!!", color: UIColor .whiteColor(), font: UIFont (name: "HelveticaNeue", size: 30)!, alignment: NSTextAlignment .Center, correction: UITextAutocorrectionType .No)
+        let defaultLabel = MemeLabelObject(color: UIColor .whiteColor(), alignment: NSTextAlignment .Center, correction: UITextAutocorrectionType .No)
         
         // Set up the defaults for the labels.
         self.topLabel.text = "TOP"
         self.topLabel.textColor = defaultLabel.color
-        self.topLabel.font = defaultLabel.font
         self.topLabel.textAlignment = defaultLabel.alignment
         self.topLabel.autocorrectionType = defaultLabel.correction
         self.bottomLabel.text = "BOTTOM"
         self.bottomLabel.textColor = defaultLabel.color
-        self.bottomLabel.font = defaultLabel.font
         self.bottomLabel.textAlignment = defaultLabel.alignment
         self.bottomLabel.autocorrectionType = defaultLabel.correction
         
@@ -110,24 +111,25 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.navigationController?.toolbar.hidden = true
         self.navigationController?.navigationBar.hidden = true;
         
+        navigationController?.setToolbarHidden(true, animated: false)
+
+        
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
-        let memeObject : UIImage =
-        UIGraphicsGetImageFromCurrentImageContext()
+        let memeObject : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         // Show toolbar and navbar
-        self.navigationController?.toolbar.hidden = true
-        self.navigationController?.navigationBar.hidden = true;
+        self.navigationController?.toolbar.hidden = false
+        self.navigationController?.navigationBar.hidden = false;
         
         return memeObject
     }
     
-    // Save the meme obeject and then retrieve it.
-    func generateMeme() -> MemeObject {
-        memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!, originalImage: memeImage.image!, memeImage: self.generatememeObject())
-        return memeObject.getMeme()
+    // Save the meme obeject locally and push it to the array.
+    func generateMeme() {
+        memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!, originalImage: memeImage.image!, memedImage: self.generatememeObject())
     }
     
     //#MARK IBActions
@@ -148,22 +150,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Define a function that launches the actionview.
     // The actionview is passed the meme to be shared.
     @IBAction func actionButtonPress(sender: AnyObject) {
-        let image = UIImage()
-        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        
+        generateMeme()
+        
+        // Push the image to the activity view so when the user shares,
+        // the correct image is used.
+        let controller = UIActivityViewController(activityItems: [memeObject.getMeme().memeImaged], applicationActivities: nil)
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
     // Defines a function that is invoked when the cancel button is pressed.
     @IBAction func cancelButtonPress(sender: AnyObject) {
-        // If the image is none nil then pass the image along while performing
-        // the segue. If there is no image then just perform the segue.
-        if (memeImage.image != nil) {
-            self.performSegueWithIdentifier("cancelPressSegue", sender: memeObject)
-        }
-        else
-        {
             self.performSegueWithIdentifier("cancelPressSegue", sender: nil)
-        }
     }
     
     //# MARK: Image picker functions.
@@ -195,9 +193,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         {
             let tabBarController = segue.destinationViewController as! UITabBarController
             let navigationController = tabBarController.viewControllers![0] as! UINavigationController
-            let vueFil = navigationController.viewControllers[0] as! SentMemesViewControllerTable
-            let data = sender as! MemeObject
-            vueFil.receivedMeme = data
+            let destView = navigationController.viewControllers[0] as! SentMemesViewControllerTable
         }
     }
 }

@@ -15,20 +15,21 @@ class MemeObject: NSObject {
     var topText: String!
     var bottomText: String!
     var originalImage: UIImage!
-    var memeImage: UIImage!
+    var memeImaged: UIImage!
     
     override init() {
         super.init()
     }
     
-    func saveMeme (topText: String, bottomText: String, originalImage: UIImage, memeImage: UIImage) {
+    func saveMeme (topText: String, bottomText: String, originalImage: UIImage, memedImage: UIImage) {
         self.topText = topText
         self.bottomText = bottomText
         self.originalImage = originalImage
-        self.memeImage = memeImage
+        self.memeImaged = memedImage
     }
     
     func getMeme() -> MemeObject {
         return self
     }
+    
 }
