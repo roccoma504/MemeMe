@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SentMemesViewControllerCollection: UIViewController {
+class SentMemesViewControllerCollection: UICollectionViewController {
+    
+    @IBOutlet weak var collection: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,5 +20,9 @@ class SentMemesViewControllerCollection: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
 }

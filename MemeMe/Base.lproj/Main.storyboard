@@ -34,14 +34,14 @@
                                                     <rect key="frame" x="20" y="4" width="108" height="71"/>
                                                     <animations/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNt-IS-gBl">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNt-IS-gBl">
                                                     <rect key="frame" x="136" y="8" width="456" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bottom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KV4-Az-ek0">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bottom" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KV4-Az-ek0">
                                                     <rect key="frame" x="136" y="37" width="456" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -92,8 +92,43 @@
                     <view key="view" contentMode="scaleToFill" id="o3O-2w-Sgm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zX5-zF-brD">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <animations/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ukd-VP-1QV">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="p2f-2s-Npf">
+                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <animations/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="scP-1i-sgF" id="Kex-q6-x1w"/>
+                                    <outlet property="delegate" destination="scP-1i-sgF" id="aO0-hW-Pfn"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zX5-zF-brD" firstAttribute="bottom" secondItem="nAj-df-QIV" secondAttribute="top" id="HuE-80-KqO"/>
+                            <constraint firstItem="zX5-zF-brD" firstAttribute="leading" secondItem="o3O-2w-Sgm" secondAttribute="leading" id="Jd7-jT-s8I"/>
+                            <constraint firstItem="zX5-zF-brD" firstAttribute="top" secondItem="e2c-gT-hiv" secondAttribute="bottom" id="S6a-Xy-Iw4"/>
+                            <constraint firstAttribute="trailing" secondItem="zX5-zF-brD" secondAttribute="trailing" id="aoM-4z-TAG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Send Memes" id="scP-1i-sgF">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="IC9-H0-l7g">
@@ -102,6 +137,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collection" destination="zX5-zF-brD" id="6sJ-P2-Oof"/>
+                        <segue destination="KRt-Be-neJ" kind="show" identifier="collectionToTableSegue" id="05S-Cn-sem"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2f-dp-fZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -143,10 +182,10 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCK-lq-T33">
-                                <rect key="frame" x="20" y="526" width="560" height="30"/>
+                                <rect key="frame" x="20" y="456" width="560" height="100"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="MAa-EH-gqm"/>
+                                    <constraint firstAttribute="height" constant="100" id="MAa-EH-gqm"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="BOTTOM">
@@ -159,11 +198,11 @@
                                 </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjU-3W-Kz6">
-                                <rect key="frame" x="20" y="64" width="560" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjU-3W-Kz6">
+                                <rect key="frame" x="20" y="64" width="560" height="100"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="5MO-sf-aix"/>
+                                    <constraint firstAttribute="height" constant="100" id="5MO-sf-aix"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="TOP">
@@ -211,6 +250,7 @@
                         <outlet property="bottomLabel" destination="XCK-lq-T33" id="Bun-5v-HjZ"/>
                         <outlet property="cameraButton" destination="mof-PC-UTb" id="Zxq-ID-igL"/>
                         <outlet property="memeImage" destination="qmS-kx-bVt" id="sOB-xL-khw"/>
+                        <outlet property="toolbar" destination="hcS-Qc-Xq9" id="P0c-46-fv9"/>
                         <outlet property="topLabel" destination="tjU-3W-Kz6" id="vUp-5Z-Pfi"/>
                         <segue destination="wvy-Yj-Xln" kind="presentation" identifier="cancelPressSegue" id="1T7-C4-ReD"/>
                     </connections>
@@ -298,10 +338,10 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="po7-P6-MP7" firstAttribute="top" secondItem="hV4-DJ-sOp" secondAttribute="bottom" id="2St-Q6-KpT"/>
-                            <constraint firstAttribute="trailing" secondItem="po7-P6-MP7" secondAttribute="trailing" id="ON0-RX-Mkd"/>
-                            <constraint firstItem="po7-P6-MP7" firstAttribute="leading" secondItem="MX6-LR-XX4" secondAttribute="leading" id="gs8-Fc-Qj1"/>
-                            <constraint firstItem="po7-P6-MP7" firstAttribute="bottom" secondItem="Fpa-RH-IAr" secondAttribute="top" id="un2-X0-7Sr"/>
+                            <constraint firstAttribute="bottom" secondItem="po7-P6-MP7" secondAttribute="bottom" id="LgW-Bi-oi7"/>
+                            <constraint firstItem="po7-P6-MP7" firstAttribute="leading" secondItem="MX6-LR-XX4" secondAttribute="leading" id="gCr-av-zW9"/>
+                            <constraint firstAttribute="trailing" secondItem="po7-P6-MP7" secondAttribute="trailing" id="m99-DT-SKM"/>
+                            <constraint firstItem="po7-P6-MP7" firstAttribute="top" secondItem="hV4-DJ-sOp" secondAttribute="bottom" id="zde-cT-f88"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xa1-36-spl"/>
@@ -339,5 +379,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6Sa-mL-HYI"/>
+        <segue reference="0Fc-d1-HZy"/>
     </inferredMetricsTieBreakers>
 </document>

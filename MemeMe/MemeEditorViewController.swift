@@ -17,6 +17,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topLabel: UITextField!
     @IBOutlet weak var bottomLabel: UITextField!
     
+    @IBOutlet weak var toolbar: UIToolbar!
     // Variables.
     
     // Defines an image picker for use by the photo picking functions.
@@ -41,18 +42,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         //TODO Add impact font
         // Define a default label object.
-        let defaultLabel = MemeLabelObject(color: UIColor .whiteColor(), alignment: NSTextAlignment .Center, correction: UITextAutocorrectionType .No)
+        let defaultLabel = MemeLabelObject(color: UIColor .whiteColor(), alignment: NSTextAlignment .Center, correction: UITextAutocorrectionType .No, font: UIFont (name: "Impact", size: 35)!)
         
         // Set up the defaults for the labels.
         self.topLabel.text = "TOP"
         self.topLabel.textColor = defaultLabel.color
         self.topLabel.textAlignment = defaultLabel.alignment
         self.topLabel.autocorrectionType = defaultLabel.correction
+        self.topLabel.font = defaultLabel.font
+
         self.bottomLabel.text = "BOTTOM"
         self.bottomLabel.textColor = defaultLabel.color
         self.bottomLabel.textAlignment = defaultLabel.alignment
         self.bottomLabel.autocorrectionType = defaultLabel.correction
-        
+        self.bottomLabel.font = defaultLabel.font
+
         // Set the enabled status of the camera button to the
         // availability of the device's camera.
         self.cameraButton.enabled = UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType .Camera)
@@ -111,23 +115,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func generatememeObject() -> UIImage {
         
         // Hide toolbar and navbar.
-        self.navigationController?.toolbar.hidden = true
         self.navigationController?.navigationBar.hidden = true;
-        
-        navigationController?.setToolbarHidden(true, animated: false)
-
+        self.toolbar.hidden = true;
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
-        let memeObject : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        let snapShotMeme : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         // Show toolbar and navbar
-        self.navigationController?.toolbar.hidden = false
+        self.toolbar.hidden = false;
         self.navigationController?.navigationBar.hidden = false;
         
-        return memeObject
+        return snapShotMeme
     }
     
     // Save the meme obeject locally and push it to the array.

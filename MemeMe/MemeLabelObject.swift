@@ -15,11 +15,13 @@ class MemeLabelObject: NSObject {
     var color: UIColor
     var alignment : NSTextAlignment
     var correction : UITextAutocorrectionType!
+    var font : UIFont!
     
     // Define an init subprogram.
-    init(color: UIColor, alignment: NSTextAlignment, correction: UITextAutocorrectionType) {
+    init(color: UIColor, alignment: NSTextAlignment, correction: UITextAutocorrectionType, font: UIFont) {
         self.color = color
         self.alignment = alignment
         self.correction = correction
+        self.font = font
     }
 }

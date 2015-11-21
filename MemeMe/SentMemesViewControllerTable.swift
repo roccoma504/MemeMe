@@ -27,6 +27,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         // Set delegates.
         memeTable.delegate = self
         memeTable.dataSource = self
+        
     }
     
     override func didReceiveMemoryWarning() {

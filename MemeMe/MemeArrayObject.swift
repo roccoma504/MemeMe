@@ -2,21 +2,24 @@
 //  MemeArrayObject.swift
 //  MemeMe
 //
-//  Created by Matthew Rocco on 11/19/15.
+//  Created by Matthew Rocco on 11/20/15.
 //  Copyright © 2015 Matthew Rocco. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
 class MemeArrayObject: NSObject {
     
-    var array: Array <MemeObject>!
+    // Define object elements.
+    private var memeArray : Array <UIImage> = []
     
-    init(Meme:MemeObject)
-    {
-    
+    func setMeme (Meme : UIImage) {
+    memeArray.append(Meme)
     }
     
-
-    
+    func getMeme() -> Array <UIImage> {
+    return memeArray
+    }
 }
+
