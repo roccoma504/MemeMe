@@ -76,8 +76,8 @@
 				3908A6841BFD3DF800FE9367 /* MemeLabelObject.swift */,
 				39192FAC1BFC07AE0040BEB4 /* MemeMe.xcdatamodeld */,
 				3908A6861BFD4E3600FE9367 /* MemeObject.swift */,
-				39192FA71BFC07AE0040BEB4 /* SentMemesViewControllerTable.swift */,
 				3908A6821BFD326900FE9367 /* SentMemesViewControllerCollction.swift */,
+				39192FA71BFC07AE0040BEB4 /* SentMemesViewControllerTable.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";

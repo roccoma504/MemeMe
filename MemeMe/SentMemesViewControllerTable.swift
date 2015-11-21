@@ -19,6 +19,8 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     
     var receivedMemeArray : Array <MemeObject> = []
     
+    var detailMemeImage : UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +66,11 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        detailMemeImage = receivedMemeArray[indexPath.row].memeImaged
+        
+        self.performSegueWithIdentifier("tableToDetailSegue", sender: nil)
+
     }
     
     // Defines a function that is invoked when the cancel button is pressed.
@@ -77,6 +84,12 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
             let destView = navigationController.viewControllers[0] as! MemeEditorViewController
             destView.receivedMemeArray = receivedMemeArray
 
+        }
+        
+        else if (segue.identifier == "tableToDetailSegue")
+        {
+            let detailVC:MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
+            detailVC.receivedMemeImage = detailMemeImage
         }
     }
 }

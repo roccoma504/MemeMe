@@ -74,6 +74,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="memeTable" destination="HNm-Mj-2He" id="RgT-c4-RfG"/>
+                        <segue destination="KRt-Be-neJ" kind="show" identifier="tableToDetailSegue" id="0Fc-d1-HZy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VER-k3-HrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -277,6 +278,41 @@
             </objects>
             <point key="canvasLocation" x="1068" y="2569"/>
         </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="fBb-Cg-QXp">
+            <objects>
+                <viewController id="KRt-Be-neJ" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hV4-DJ-sOp"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fpa-RH-IAr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MX6-LR-XX4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="po7-P6-MP7">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="po7-P6-MP7" firstAttribute="top" secondItem="hV4-DJ-sOp" secondAttribute="bottom" id="2St-Q6-KpT"/>
+                            <constraint firstAttribute="trailing" secondItem="po7-P6-MP7" secondAttribute="trailing" id="ON0-RX-Mkd"/>
+                            <constraint firstItem="po7-P6-MP7" firstAttribute="leading" secondItem="MX6-LR-XX4" secondAttribute="leading" id="gs8-Fc-Qj1"/>
+                            <constraint firstItem="po7-P6-MP7" firstAttribute="bottom" secondItem="Fpa-RH-IAr" secondAttribute="top" id="un2-X0-7Sr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xa1-36-spl"/>
+                    <connections>
+                        <outlet property="memeImage" destination="po7-P6-MP7" id="IFS-xM-fth"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S2d-Wq-3fw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2489" y="1531"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Iq-GZ-3vA">
             <objects>
@@ -294,7 +330,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xag-Uv-m4Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2493" y="2202"/>
+            <point key="canvasLocation" x="2489" y="2202"/>
         </scene>
     </scenes>
     <resources>

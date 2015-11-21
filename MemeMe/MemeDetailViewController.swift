@@ -8,6 +8,13 @@
 
 import UIKit
 
-class MemeDetailViewController: UIViewController {
-
+class MemeDetailViewController: UIViewController, UINavigationControllerDelegate {
+    
+    @IBOutlet weak var memeImage: UIImageView!
+    
+    var receivedMemeImage : UIImage!
+    
+    override func viewDidLoad() {
+        memeImage.image = receivedMemeImage
+    }
 }

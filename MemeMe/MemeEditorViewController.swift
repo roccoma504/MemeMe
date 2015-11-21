@@ -160,6 +160,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // The actionview is passed the meme to be shared.
     @IBAction func actionButtonPress(sender: AnyObject) {
         
+        // Generate the meme.
         generateMeme()
         
         // Push the image to the activity view so when the user shares,
