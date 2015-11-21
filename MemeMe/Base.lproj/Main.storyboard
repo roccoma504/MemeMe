@@ -68,7 +68,7 @@
                     <navigationItem key="navigationItem" title="Sent Memes" id="fvF-wP-xW8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="itu-Xu-5y7">
                             <connections>
-                                <segue destination="rER-gN-y3g" kind="presentation" id="6Sa-mL-HYI"/>
+                                <segue destination="rER-gN-y3g" kind="presentation" identifier="tableAddSegue" id="6Sa-mL-HYI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -216,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqR-gZ-OVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3262" y="2202"/>
+            <point key="canvasLocation" x="3122" y="2202"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rga-qP-tjm">

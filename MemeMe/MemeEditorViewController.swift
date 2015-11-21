@@ -25,6 +25,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Defines a memeobject.
     var memeObject = MemeObject()
     
+    var receivedMemeArray : Array <MemeObject> = []
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,7 +132,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Save the meme obeject locally and push it to the array.
     func generateMeme() {
+        
         memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!, originalImage: memeImage.image!, memedImage: self.generatememeObject())
+        
+        let newMeme = memeObject.getMeme()
+        
+        receivedMemeArray.append(newMeme)
+        
     }
     
     //#MARK IBActions
@@ -187,6 +196,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Defines a function that is invoked when the cancel button is pressed.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+                
         // If the user has successfully picked an image then pass the data.
         // If we dont check this here the app will crash.
         if (segue.identifier == "cancelPressSegue" && memeImage.image != nil)
@@ -194,6 +204,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let tabBarController = segue.destinationViewController as! UITabBarController
             let navigationController = tabBarController.viewControllers![0] as! UINavigationController
             let destView = navigationController.viewControllers[0] as! SentMemesViewControllerTable
+            destView.receivedMemeArray = receivedMemeArray
         }
     }
 }

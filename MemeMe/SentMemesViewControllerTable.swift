@@ -17,14 +17,16 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     
     let textCellIdentifier = "tableCell"
     
+    var receivedMemeArray : Array <MemeObject> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set delegates.
         memeTable.delegate = self
         memeTable.dataSource = self
-            }
-        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,7 +39,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return receivedMemeArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -45,23 +47,37 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
         let row = indexPath.row
         
-//        if let memeImage = self.view.viewWithTag(1) as? UIImageView {
-//            memeImage.image = memeArray[row].memeImaged
-//        }
+                if let memeImage = self.view.viewWithTag(1) as? UIImageView {
+                    memeImage.image = receivedMemeArray[row].memeImaged
+                }
         
-//        if let topLabel = self.view.viewWithTag(2) as? UILabel {
-//            topLabel.text = memeArray[row].topText
-//        }
+                if let topLabel = self.view.viewWithTag(2) as? UILabel {
+                    topLabel.text = receivedMemeArray[row].topText
+                }
         
-//        if let botLabel = self.view.viewWithTag(3) as? UILabel {
-//            botLabel.text = memeArray[row].bottomText
-//        }
+                if let botLabel = self.view.viewWithTag(3) as? UILabel {
+                    botLabel.text = receivedMemeArray[row].bottomText
+                }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // Defines a function that is invoked when the cancel button is pressed.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        // If the user has successfully picked an image then pass the data.
+        // If we dont check this here the app will crash.
+        if (segue.identifier == "tableAddSegue")
+        {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let destView = navigationController.viewControllers[0] as! MemeEditorViewController
+            destView.receivedMemeArray = receivedMemeArray
+
+        }
     }
 }
 
