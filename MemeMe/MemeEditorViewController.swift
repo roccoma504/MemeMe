@@ -27,7 +27,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     // Define an array of meme objects.
     var receivedMemeArray : Array <MemeObject> = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,22 +39,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         topLabel.delegate = self
         bottomLabel.delegate = self
         
-        //TODO Add impact font
         // Define a default label object.
-        let defaultLabel = MemeLabelObject(color: UIColor .whiteColor(), alignment: NSTextAlignment .Center, correction: UITextAutocorrectionType .No, font: UIFont (name: "Impact", size: 35)!)
+        let defaultLabel = MemeLabelObject(color: UIColor .whiteColor(), alignment: NSTextAlignment .Center, correction: UITextAutocorrectionType .No, font: UIFont (name: "Impact", size: 40)!)
         
-        // Set up the defaults for the labels.
+        // Set the labels initial parameters.
         self.topLabel.text = "TOP"
-        self.topLabel.textColor = defaultLabel.color
         self.topLabel.textAlignment = defaultLabel.alignment
         self.topLabel.autocorrectionType = defaultLabel.correction
         self.topLabel.font = defaultLabel.font
-
+        self.topLabel.textColor = defaultLabel.color
         self.bottomLabel.text = "BOTTOM"
-        self.bottomLabel.textColor = defaultLabel.color
         self.bottomLabel.textAlignment = defaultLabel.alignment
         self.bottomLabel.autocorrectionType = defaultLabel.correction
         self.bottomLabel.font = defaultLabel.font
+        self.bottomLabel.textColor = defaultLabel.color
 
         // Set the enabled status of the camera button to the
         // availability of the device's camera.
@@ -133,13 +131,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Save the meme obeject locally and push it to the array.
     func generateMeme() {
-        
         memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!, originalImage: memeImage.image!, memedImage: self.generatememeObject())
-        
-        let newMeme = memeObject.getMeme()
-        
-        receivedMemeArray.append(newMeme)
-        
+        receivedMemeArray.append(memeObject.getMeme())
     }
     
     //#MARK IBActions

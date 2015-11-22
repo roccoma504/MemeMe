@@ -5,6 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Impact.ttf">
+            <string>Impact</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Sent Memes-->
         <scene sceneID="ag2-6g-kb3">
@@ -118,7 +123,7 @@
                                     <constraint firstItem="eDe-8m-rxj" firstAttribute="top" secondItem="amk-yw-9F6" secondAttribute="topMargin" constant="-6" id="2mw-tB-Cme"/>
                                     <constraint firstItem="eDe-8m-rxj" firstAttribute="leading" secondItem="amk-yw-9F6" secondAttribute="leadingMargin" constant="-5" id="gKJ-lt-EZj"/>
                                     <constraint firstItem="eDe-8m-rxj" firstAttribute="centerY" secondItem="amk-yw-9F6" secondAttribute="centerY" id="ib2-uZ-c8R"/>
-                                    <constraint firstItem="eDe-8m-rxj" firstAttribute="centerX" secondItem="amk-yw-9F6" secondAttribute="centerX" id="w7a-eh-naG"/>
+                                    <constraint firstItem="eDe-8m-rxj" firstAttribute="centerX" secondItem="amk-yw-9F6" secondAttribute="centerX" constant="1" id="w7a-eh-naG"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="memeImage" destination="eDe-8m-rxj" id="FSO-vc-Yf1"/>
@@ -183,7 +188,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="BOTTOM">
                                         <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="30" name="Impact"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -194,12 +199,14 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjU-3W-Kz6">
                                 <rect key="frame" x="20" y="64" width="560" height="100"/>
                                 <animations/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="5MO-sf-aix"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="TOP">
                                         <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="36" name="Impact"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
