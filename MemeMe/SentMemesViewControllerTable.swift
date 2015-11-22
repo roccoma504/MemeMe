@@ -29,7 +29,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         memeTable.delegate = self
         memeTable.dataSource = self
     }
-
+    
     override func viewDidAppear(animated: Bool) {
         // Define a constant of all of the tabs embeded in the tab bar controller.
         let navControllers = self.tabBarController?.viewControllers
@@ -50,7 +50,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     }
     
     // Defines the number of cells in the section, this scales depending on
-    // the number of memes.    
+    // the number of memes.
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return receivedMemeArray.count
     }
