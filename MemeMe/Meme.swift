@@ -12,16 +12,15 @@ import UIKit
 // Defines a class of a single meme. Contains all attributes of a meme
 // plus the combined image.
 struct Meme {
-    
+
     // Define object elements.
     var topText: String!
     var bottomText: String!
     var originalImage: UIImage!
     var memedImage: UIImage!
     
-    // Defines a gunction to retrieve the meme.
+    // Defines a function to retrieve the meme.
     func getMeme() -> Meme {
         return self
     }
-    
 }

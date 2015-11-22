@@ -80,7 +80,7 @@
             </objects>
             <point key="canvasLocation" x="1784" y="1834"/>
         </scene>
-        <!--Sent Memes View Controller Collection-->
+        <!--Sent Memes-->
         <scene sceneID="sZR-P0-hRo">
             <objects>
                 <collectionViewController id="R5d-R7-cX0" customClass="SentMemesViewControllerCollection" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -131,7 +131,13 @@
                             <outlet property="delegate" destination="R5d-R7-cX0" id="P4g-1e-gp8"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="0yo-T8-0Iv"/>
+                    <navigationItem key="navigationItem" title="Sent Memes" id="0yo-T8-0Iv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gmd-ub-ZpR">
+                            <connections>
+                                <segue destination="rER-gN-y3g" kind="presentation" identifier="collectionAddSegue" id="CSO-hC-4mq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="KRt-Be-neJ" kind="show" identifier="collectionToDetailSegue" id="9mQ-PW-wf1"/>
                     </connections>
@@ -152,7 +158,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-kx-bVt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-kx-bVt">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
@@ -179,7 +185,7 @@
                                 <rect key="frame" x="20" y="456" width="560" height="100"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="MAa-EH-gqm"/>
+                                    <constraint firstAttribute="height" constant="100" id="k5R-4h-LkJ"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="BOTTOM">
@@ -197,7 +203,7 @@
                                 <animations/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="5MO-sf-aix"/>
+                                    <constraint firstAttribute="height" constant="100" id="aZG-Q3-2bl"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="TOP">
@@ -214,23 +220,19 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leadingMargin" constant="-20" id="3g1-jY-nuL"/>
-                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="trailing" secondItem="qmS-kx-bVt" secondAttribute="trailing" id="6dw-Zh-XBV"/>
-                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="top" secondItem="XCK-lq-T33" secondAttribute="bottom" id="9Mw-Y3-LWA"/>
-                            <constraint firstItem="XCK-lq-T33" firstAttribute="leading" secondItem="tjU-3W-Kz6" secondAttribute="leading" id="C9A-9E-GMq"/>
-                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leadingMargin" id="CsI-wK-aTa"/>
-                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="bottom" secondItem="0yg-PB-h5n" secondAttribute="top" id="G0V-So-Pom"/>
-                            <constraint firstItem="XCK-lq-T33" firstAttribute="centerX" secondItem="hcS-Qc-Xq9" secondAttribute="centerX" id="IUf-tH-XEB"/>
-                            <constraint firstAttribute="trailing" secondItem="hcS-Qc-Xq9" secondAttribute="trailing" id="XI7-47-iyT"/>
-                            <constraint firstItem="XCK-lq-T33" firstAttribute="trailing" secondItem="tjU-3W-Kz6" secondAttribute="trailing" id="Y8h-Hd-xHm"/>
-                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="top" secondItem="mys-s1-8wR" secondAttribute="bottom" id="aDy-HO-Z1y"/>
-                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="leading" secondItem="qmS-kx-bVt" secondAttribute="leading" id="k63-A3-chm"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="centerX" secondItem="rP9-3Z-77C" secondAttribute="centerX" id="keN-cy-r93"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="centerY" secondItem="rP9-3Z-77C" secondAttribute="centerY" id="o1V-2d-nb7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qmS-kx-bVt" secondAttribute="trailing" constant="-20" id="p3E-sT-UTl"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leading" id="ubq-l3-7te"/>
-                            <constraint firstItem="qmS-kx-bVt" firstAttribute="top" secondItem="tjU-3W-Kz6" secondAttribute="top" constant="-64" id="vr1-E5-fMP"/>
-                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="top" secondItem="qmS-kx-bVt" secondAttribute="bottom" constant="-44" id="yCu-MF-5In"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="top" secondItem="XCK-lq-T33" secondAttribute="bottom" id="0NH-1s-HsM"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="trailing" secondItem="qmS-kx-bVt" secondAttribute="trailing" id="2SP-LB-Nqu"/>
+                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="leading" secondItem="XCK-lq-T33" secondAttribute="leading" id="2nl-uj-O4C"/>
+                            <constraint firstItem="qmS-kx-bVt" firstAttribute="top" secondItem="rP9-3Z-77C" secondAttribute="top" id="LMY-LG-tb2"/>
+                            <constraint firstAttribute="trailing" secondItem="hcS-Qc-Xq9" secondAttribute="trailing" id="MWx-F6-8Hd"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leading" id="Qtf-Oc-0Bk"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="bottom" secondItem="0yg-PB-h5n" secondAttribute="top" id="Sqh-3J-9lN"/>
+                            <constraint firstItem="qmS-kx-bVt" firstAttribute="leading" secondItem="hcS-Qc-Xq9" secondAttribute="leading" id="W4r-SL-gYL"/>
+                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="trailing" secondItem="XCK-lq-T33" secondAttribute="trailing" id="YDY-l2-qve"/>
+                            <constraint firstItem="qmS-kx-bVt" firstAttribute="bottom" secondItem="0yg-PB-h5n" secondAttribute="top" id="h0J-Pk-zXO"/>
+                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="top" secondItem="mys-s1-8wR" secondAttribute="bottom" id="ma0-ua-gLL"/>
+                            <constraint firstItem="hcS-Qc-Xq9" firstAttribute="centerX" secondItem="XCK-lq-T33" secondAttribute="centerX" id="uDx-fQ-ZBa"/>
+                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leadingMargin" id="xtz-M9-V6n"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Meme Editor" id="uFB-0U-tM8">
@@ -378,6 +380,7 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="CSO-hC-4mq"/>
         <segue reference="9mQ-PW-wf1"/>
     </inferredMetricsTieBreakers>
 </document>

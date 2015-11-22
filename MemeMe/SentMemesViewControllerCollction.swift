@@ -10,24 +10,18 @@ import UIKit
 
 class SentMemesViewControllerCollection: UICollectionViewController {
     
+    // Private variables.
+    
     // Defines a cell identifier.
     private let reuseIdentifier = "cell"
     
     // Defines a single meme image to be passed to the detail view.
     private var detailMemeImage : UIImage!
     
+    // Public variables.
+    
     // Defines an array of meme objects that is retrieved from the table view.
     var receivedMemeArray : Array <Meme> = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // Defines the number of sections in the collection.
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -50,22 +44,29 @@ class SentMemesViewControllerCollection: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MemeCell
         let cellMemeImage = memeForIndexPath(indexPath)
         cell.backgroundColor = UIColor.grayColor()
+        // Set the image for the UIImageView.
         cell.memeImage.image = cellMemeImage
         return cell
     }
     
-    // When the item in the collection is selected transistion to the detail view.
+    // When the item in the collection is selected transistion to the detail
+    // view.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         detailMemeImage = receivedMemeArray[indexPath.row].memedImage
-        self.performSegueWithIdentifier("collectionToDetailSegue", sender: nil)
+        performSegueWithIdentifier("collectionToDetailSegue", sender: nil)
     }
-    
     
     // Prepare the data when the segue occurs.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "collectionToDetailSegue") {
             let detailVC:MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
             detailVC.receivedMemeImage = detailMemeImage
+        }
+        else if (segue.identifier == "collectionAddSegue") {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let destView = navigationController.viewControllers[0] as! MemeEditorViewController
+            destView.newSentMemeArray = receivedMemeArray
+            destView.receivedMemeArray = receivedMemeArray
         }
     }
 }

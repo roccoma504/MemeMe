@@ -10,7 +10,8 @@ import UIKit
 
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    // Define the UI elements.
+    // UI elements.
+    
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var activityButton: UIBarButtonItem!
@@ -18,7 +19,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
     
-    // Variables.
+    // Private variables.
     
     // Defines an image picker for use by the photo picking functions.
     private var imagePicker = UIImagePickerController()
@@ -26,29 +27,33 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Defines a memeobject.
     private var memeObject = Meme()
     
-    // Define an array of meme objects.
-    var newSentMemeArray : Array <Meme> = []
-    
     // Defines a variable that the memed image is stored in.
     private var savedMemeImage : UIImage!
+    
+    // Public variables.
+    
+    // Define an array of meme objects. This array will contain new memes
+    // that the user creates.
+    var newSentMemeArray : Array <Meme>!
+    
+    // Define an array of meme objects. This is the array before any
+    // modifications.
+    var receivedMemeArray : Array <Meme>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Establish listeners for detecting when the keyboard hides and shows.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-        
         //Looks for single or multiple taps to dismiss a text field.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+            action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
-
+        
         // Set the delegates.
         imagePicker.delegate = self
         topTextField.delegate = self
         bottomTextField.delegate = self
         
-        // Defile the common text attributes for both labels.
+        // Define the common text attributes for both labels.
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -66,19 +71,37 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Set the enabled status of the camera button to the
         // availability of the device's camera.
-        self.cameraButton.enabled = UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType .Camera)
+        cameraButton.enabled = UIImagePickerController
+            .isSourceTypeAvailable(UIImagePickerControllerSourceType .Camera)
         
-        // Disable the activity button.
-        self.activityButton.enabled = false
+        // Disable the activity button by default. This is reenabled when
+        // a image is successfully selected.
+        activityButton.enabled = false
         
         // Set up UI background color.
-        self.view.backgroundColor = UIColor .grayColor()
+        view.backgroundColor = UIColor .grayColor()
+        
+        // Set the content mode for the image.
+        memeImage.image = nil
+        memeImage.contentMode = UIViewContentMode .ScaleAspectFit
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        // Establish listeners for detecting when the keyboard hides and shows.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:
+            Selector("keyboardWillShow:"),
+            name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:
+            Selector("keyboardWillHide:"),
+            name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
         // Remove all observers.
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: self.view.window)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: self.view.window)
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+            name: UIKeyboardWillShowNotification, object: view.window)
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+            name: UIKeyboardWillHideNotification, object: view.window)
     }
     
     //# MARK Text field subprograms.
@@ -97,8 +120,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // When the keyboard shows move the view up the height of the keyboard.
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if self.bottomTextField.editing {
-                self.view.frame.origin.y -= keyboardSize.height
+            if bottomTextField.editing {
+                view.frame.origin.y -= keyboardSize.height
             }
         }
     }
@@ -106,8 +129,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // When the keyboard shows move the view down the height of the keyboard.
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if self.bottomTextField.editing {
-                self.view.frame.origin.y += keyboardSize.height
+            if bottomTextField.editing {
+                view.frame.origin.y += keyboardSize.height
             }
         }
     }
@@ -120,13 +143,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         navigationController?.navigationBar.hidden = true;
         toolbar.hidden = true;
         
-        // Render view to an image
+        // Render the view after the screen updates.
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let snapShotMeme : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // Show toolbar and navbar
+        // Show toolbar and navbar.
         toolbar.hidden = false;
         navigationController?.navigationBar.hidden = false;
         
@@ -134,11 +157,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     // This save function creates a meme object.
-    // Note for 1.0 this doesn't really do much.
     func save(snapShotMeme : UIImage) {
-        //Create the meme
-        let meme = Meme(topText:topTextField.text!, bottomText : bottomTextField.text!,
-            originalImage: memeImage.image!, memedImage : snapShotMeme)
+        // Create the meme.
+        let meme = Meme(topText:topTextField.text!,
+            bottomText : bottomTextField.text!, originalImage: memeImage.image!,
+            memedImage : snapShotMeme)
+        
+        // Append the new meme to the array for output.
         newSentMemeArray.append(meme)
     }
     
@@ -173,20 +198,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         presentViewController(controller, animated: true, completion: nil)
         
         // This method is called when the image sending is completed.
-        controller.completionWithItemsHandler = { (type, completed, returnedItems, error) -> Void in
-            print(completed)
+        controller.completionWithItemsHandler = { (type, completed,
+            returnedItems, error) -> Void in
             // If the action was completed successfully and the user did not hit
             // the cancel button then we save the meme.
             if (completed && type != "nil") {
                 self.save(snapShotMeme)
             }
         }
-        
     }
     
     // Defines a function that is invoked when the cancel button is pressed.
     @IBAction func cancelButtonPress(sender: AnyObject) {
-        self.performSegueWithIdentifier("cancelPressSegue", sender: nil)
+        performSegueWithIdentifier("cancelPressSegue", sender: nil)
     }
     
     //# MARK: Image picker functions.
@@ -196,17 +220,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // button. Dismiss the view either way.
     func imagePickerController(picker: UIImagePickerController!,
         didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
-        if let selectedImage : UIImage = image {
-            memeImage.image = selectedImage
-            memeImage.contentMode = .ScaleAspectFill
-            self.activityButton.enabled = true
-        }
-        dismissViewControllerAnimated(true, completion: nil)
+            if let selectedImage : UIImage = image {
+                memeImage.image = selectedImage
+                memeImage.contentMode = .ScaleAspectFill
+                activityButton.enabled = true
+            }
+            dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Defines a function that is called when the user cancels the pick.
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // Returns the received meme array before any modification.
+    func getCompleteMemeArray() -> Array <Meme>! {
+        return receivedMemeArray
     }
     
     //# MARK: Segues
@@ -221,6 +250,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let navigationController = tabBarController.viewControllers![0] as! UINavigationController
             let destView = navigationController.viewControllers[0] as! SentMemesViewControllerTable
             destView.receivedMemeArray = newSentMemeArray
+        }
+        else if (segue.identifier == "cancelPressSegue") {
+            let tabBarController = segue.destinationViewController as! UITabBarController
+            let navigationController = tabBarController.viewControllers![0] as! UINavigationController
+            let destView = navigationController.viewControllers[0] as! SentMemesViewControllerTable
+            destView.receivedMemeArray = getCompleteMemeArray()
         }
     }
 }

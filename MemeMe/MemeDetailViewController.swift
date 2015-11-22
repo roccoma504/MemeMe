@@ -14,9 +14,13 @@ class MemeDetailViewController: UIViewController, UINavigationControllerDelegate
     
     @IBOutlet weak var memeImage: UIImageView!
     
+    // The received image. We only pass this view the memed image as we don't
+    // care about the other portions of the struct.
     var receivedMemeImage : UIImage!
     
     override func viewDidLoad() {
+        // Set the content mode for the image.
+        memeImage.contentMode = UIViewContentMode .ScaleAspectFit
         memeImage.image = receivedMemeImage
     }
 }

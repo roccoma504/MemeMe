@@ -13,11 +13,15 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     // IBOutlets.
     @IBOutlet weak var memeTable: UITableView!
     
+    // Private variables.
+    
     // Define the cell identifier for filling the table cells.
     private let textCellIdentifier = "tableCell"
     
     // Defines a single meme image to be passed to the detail view.
     private var detailMemeImage : UIImage!
+    
+    // Public variables.
     
     // Defines an array that contains all of the users memes.
     var receivedMemeArray : Array <Meme> = []
@@ -30,6 +34,9 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         memeTable.dataSource = self
     }
     
+    // When the view appears we want to set up the view. Because the view is not
+    // unloaded when switching between tabs we need to do this here instead of
+    // viewDidLoad.
     override func viewDidAppear(animated: Bool) {
         // Define a constant of all of the tabs embeded in the tab bar controller.
         let navControllers = self.tabBarController?.viewControllers
@@ -88,6 +95,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         if (segue.identifier == "tableAddSegue") {
             let navigationController = segue.destinationViewController as! UINavigationController
             let destView = navigationController.viewControllers[0] as! MemeEditorViewController
+            destView.newSentMemeArray = receivedMemeArray
             destView.receivedMemeArray = receivedMemeArray
         }
         else if (segue.identifier == "tableToDetailSegue") {
