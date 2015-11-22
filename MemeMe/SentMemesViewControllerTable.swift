@@ -17,7 +17,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     // Define the cell identifier for filling the table cells.
     private let textCellIdentifier = "tableCell"
     
-    // Defines a single meme image.
+    // Defines a single meme image to be passed to the detail view.
     private var detailMemeImage : UIImage!
     
     // Defines an array that contains all of the users memes.
@@ -29,7 +29,6 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         // Set delegates.
         memeTable.delegate = self
         memeTable.dataSource = self
-        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -90,7 +89,6 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
 
     }
     
-    // Defines a function that is invoked when the cancel button is pressed.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         // If the user has successfully picked an image then pass the data.

@@ -13,8 +13,8 @@ class SentMemesViewControllerCollection: UICollectionViewController {
     // Defines a cell identifier.
     private let reuseIdentifier = "cell"
     
-    // Defines the inserts for the cells (frame)
-    private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    // Defines a single meme image to be passed to the detail view.
+    private var detailMemeImage : UIImage!
     
     var receivedMemeArray : Array <MemeObject> = []
     
@@ -46,5 +46,21 @@ class SentMemesViewControllerCollection: UICollectionViewController {
         cell.backgroundColor = UIColor.blackColor()
         cell.memeImage.image = memeImage
         return cell
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        detailMemeImage = receivedMemeArray[indexPath.row].memeImaged
+        self.performSegueWithIdentifier("collectionToDetailSegue", sender: nil)
+    }
+    
+    
+    // Defines a function that is invoked when the cancel button is pressed.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+            
+    if (segue.identifier == "collectionToDetailSegue")
+        {
+            let detailVC:MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
+            detailVC.receivedMemeImage = detailMemeImage
+        }
     }
 }

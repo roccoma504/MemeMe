@@ -131,6 +131,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="0yo-T8-0Iv"/>
+                    <connections>
+                        <segue destination="KRt-Be-neJ" kind="show" identifier="collectionToDetailSegue" id="9mQ-PW-wf1"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cda-R0-Cgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -216,7 +219,7 @@
                             <constraint firstItem="XCK-lq-T33" firstAttribute="centerX" secondItem="hcS-Qc-Xq9" secondAttribute="centerX" id="IUf-tH-XEB"/>
                             <constraint firstAttribute="trailing" secondItem="hcS-Qc-Xq9" secondAttribute="trailing" id="XI7-47-iyT"/>
                             <constraint firstItem="XCK-lq-T33" firstAttribute="trailing" secondItem="tjU-3W-Kz6" secondAttribute="trailing" id="Y8h-Hd-xHm"/>
-                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="top" secondItem="mys-s1-8wR" secondAttribute="bottom" id="aDy-HO-Z1y"/>
+                            <constraint firstItem="tjU-3W-Kz6" firstAttribute="top" secondItem="mys-s1-8wR" secondAttribute="bottom" constant="44" id="aDy-HO-Z1y"/>
                             <constraint firstItem="hcS-Qc-Xq9" firstAttribute="leading" secondItem="qmS-kx-bVt" secondAttribute="leading" id="k63-A3-chm"/>
                             <constraint firstItem="qmS-kx-bVt" firstAttribute="leading" secondItem="rP9-3Z-77C" secondAttribute="leading" id="ubq-l3-7te"/>
                             <constraint firstItem="qmS-kx-bVt" firstAttribute="top" secondItem="tjU-3W-Kz6" secondAttribute="top" constant="-64" id="vr1-E5-fMP"/>
@@ -247,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqR-gZ-OVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3122" y="2202"/>
+            <point key="canvasLocation" x="3244" y="2231"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rga-qP-tjm">
@@ -367,4 +370,7 @@
         <image name="collection" width="30" height="30"/>
         <image name="table" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="9mQ-PW-wf1"/>
+    </inferredMetricsTieBreakers>
 </document>
