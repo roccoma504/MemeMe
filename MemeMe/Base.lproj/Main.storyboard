@@ -37,14 +37,14 @@
                                                     <rect key="frame" x="136" y="8" width="456" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bottom" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KV4-Az-ek0">
                                                     <rect key="frame" x="136" y="37" width="456" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -247,11 +247,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityButton" destination="XCY-iQ-y7w" id="rVQ-BR-aNH"/>
-                        <outlet property="bottomLabel" destination="XCK-lq-T33" id="Bun-5v-HjZ"/>
+                        <outlet property="bottomTextField" destination="XCK-lq-T33" id="7Yx-Ue-jEf"/>
                         <outlet property="cameraButton" destination="mof-PC-UTb" id="Zxq-ID-igL"/>
                         <outlet property="memeImage" destination="qmS-kx-bVt" id="sOB-xL-khw"/>
                         <outlet property="toolbar" destination="hcS-Qc-Xq9" id="P0c-46-fv9"/>
-                        <outlet property="topLabel" destination="tjU-3W-Kz6" id="vUp-5Z-Pfi"/>
+                        <outlet property="topTextField" destination="tjU-3W-Kz6" id="NOe-vd-Bb2"/>
                         <segue destination="wvy-Yj-Xln" kind="presentation" identifier="cancelPressSegue" id="1T7-C4-ReD"/>
                     </connections>
                 </viewController>

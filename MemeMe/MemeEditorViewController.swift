@@ -14,8 +14,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var activityButton: UIBarButtonItem!
-    @IBOutlet weak var topLabel: UITextField!
-    @IBOutlet weak var bottomLabel: UITextField!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
     
     // Variables.
@@ -24,10 +24,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     private var imagePicker = UIImagePickerController()
     
     // Defines a memeobject.
-    private var memeObject = MemeObject()
+    private var memeObject = Meme()
     
     // Define an array of meme objects.
-    var receivedMemeArray : Array <MemeObject> = []
+    var receivedMemeArray : Array <Meme> = []
+    
+    // Defines a variable that the memed image is stored in.
+    private var savedMemeImage : UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,23 +45,24 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
         // Set the delegates.
         imagePicker.delegate = self
-        topLabel.delegate = self
-        bottomLabel.delegate = self
+        topTextField.delegate = self
+        bottomTextField.delegate = self
         
-        // Define a default label object.
-        let defaultLabel = MemeLabelObject(color: UIColor .whiteColor(), alignment: NSTextAlignment .Center, correction: UITextAutocorrectionType .No, font: UIFont (name: "Impact", size: 40)!)
+        // Defile the common text attributes for both labels.
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "Impact", size: 40)!,
+            NSStrokeWidthAttributeName : -5.0]
         
-        // Set the labels initial parameters.
-        self.topLabel.text = "TOP"
-        self.topLabel.textAlignment = defaultLabel.alignment
-        self.topLabel.autocorrectionType = defaultLabel.correction
-        self.topLabel.font = defaultLabel.font
-        self.topLabel.textColor = defaultLabel.color
-        self.bottomLabel.text = "BOTTOM"
-        self.bottomLabel.textAlignment = defaultLabel.alignment
-        self.bottomLabel.autocorrectionType = defaultLabel.correction
-        self.bottomLabel.font = defaultLabel.font
-        self.bottomLabel.textColor = defaultLabel.color
+        // Set the labels initial text field parameters.
+        topTextField.text = "TOP"
+        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = .Center
+        
+        bottomTextField.text = "BOTTOM"
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = .Center
         
         // Set the enabled status of the camera button to the
         // availability of the device's camera.
@@ -93,7 +97,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // When the keyboard shows move the view up the height of the keyboard.
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if self.bottomLabel.editing {
+            if self.bottomTextField.editing {
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
@@ -102,7 +106,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // When the keyboard shows move the view down the height of the keyboard.
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if self.bottomLabel.editing {
+            if self.bottomTextField.editing {
                 self.view.frame.origin.y += keyboardSize.height
             }
         }
@@ -110,30 +114,32 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     //#MARK Meme subprograms
     
-    // Defines a function that returns UIImage with the UILabels embeded in int.
-    func generatememeObject() -> UIImage {
+    // Defines a function that returns UIImage with the text embeded in it.
+    func generateMeme() -> UIImage {
         // Hide toolbar and navbar.
-        self.navigationController?.navigationBar.hidden = true;
-        self.toolbar.hidden = true;
+        navigationController?.navigationBar.hidden = true;
+        toolbar.hidden = true;
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let snapShotMeme : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         // Show toolbar and navbar
-        self.toolbar.hidden = false;
-        self.navigationController?.navigationBar.hidden = false;
+        toolbar.hidden = false;
+        navigationController?.navigationBar.hidden = false;
         
         return snapShotMeme
     }
     
-    // Save the meme obeject locally and push it to the array.
-    func generateMeme() {
-        memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!,
-            originalImage: memeImage.image!, memedImage: self.generatememeObject())
-        receivedMemeArray.append(memeObject.getMeme())
+    // This save function creates a meme object.
+    // Note for 1.0 this doesn't really do much.
+    func save(snapShotMeme : UIImage) {
+        //Create the meme
+        let meme = Meme(topText:topTextField.text!, bottomText : bottomTextField.text!,
+            originalImage: memeImage.image!, memedImage : snapShotMeme)
+        receivedMemeArray.append(meme)
     }
     
     //#MARK IBActions
@@ -154,14 +160,28 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Define a function that launches the actionview.
     // The actionview is passed the meme to be shared.
     @IBAction func actionButtonPress(sender: AnyObject) {
-        // Generate the meme.
-        generateMeme()
+        
+        // Define a local snapshot of the meme so it can be passed to the
+        // activity view and the save function if required.
+        // This is mostly to prevent having to call generateMeme twice.
+        let snapShotMeme = generateMeme()
         
         // Push the image to the activity view so when the user shares,
         // the correct image is used.
         let controller = UIActivityViewController(activityItems:
-            [memeObject.getMeme().memeImaged], applicationActivities: nil)
-        self.presentViewController(controller, animated: true, completion: nil)
+            [snapShotMeme], applicationActivities: nil)
+        presentViewController(controller, animated: true, completion: nil)
+        
+        // This method is called when the image sending is completed.
+        controller.completionWithItemsHandler = { (type, completed, returnedItems, error) -> Void in
+            print(completed)
+            // If the action was completed successfully and the user did not hit
+            // the cancel button then we save the meme.
+            if (completed && type != "nil") {
+                self.save(snapShotMeme)
+            }
+        }
+        
     }
     
     // Defines a function that is invoked when the cancel button is pressed.

@@ -20,7 +20,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     private var detailMemeImage : UIImage!
     
     // Defines an array that contains all of the users memes.
-    var receivedMemeArray : Array <MemeObject> = []
+    var receivedMemeArray : Array <Meme> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         // Here we check to ensure that each element of the cell is non nil.
         // If the particular element is good, set it to the portion of the cell.
         if let memeImage = self.view.viewWithTag(1) as? UIImageView {
-            memeImage.image = receivedMemeArray[row].memeImaged
+            memeImage.image = receivedMemeArray[row].memedImage
         }
         if let topLabel = self.view.viewWithTag(2) as? UILabel {
             topLabel.text = receivedMemeArray[row].topText
@@ -77,7 +77,7 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     // When the cell is chosen segue to the detil view.
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        detailMemeImage = receivedMemeArray[indexPath.row].memeImaged
+        detailMemeImage = receivedMemeArray[indexPath.row].memedImage
         self.performSegueWithIdentifier("tableToDetailSegue", sender: nil)
     }
     

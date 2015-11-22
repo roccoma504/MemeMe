@@ -17,7 +17,7 @@ class SentMemesViewControllerCollection: UICollectionViewController {
     private var detailMemeImage : UIImage!
     
     // Defines an array of meme objects that is retrieved from the table view.
-    var receivedMemeArray : Array <MemeObject> = []
+    var receivedMemeArray : Array <Meme> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class SentMemesViewControllerCollection: UICollectionViewController {
     
     // Returns the image based on which cell we are trying to fill.
     func memeForIndexPath(indexPath: NSIndexPath) -> UIImage {
-        return receivedMemeArray[indexPath.row].memeImaged
+        return receivedMemeArray[indexPath.row].memedImage
     }
     
     // Configures and returns the cell.
@@ -56,7 +56,7 @@ class SentMemesViewControllerCollection: UICollectionViewController {
     
     // When the item in the collection is selected transistion to the detail view.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        detailMemeImage = receivedMemeArray[indexPath.row].memeImaged
+        detailMemeImage = receivedMemeArray[indexPath.row].memedImage
         self.performSegueWithIdentifier("collectionToDetailSegue", sender: nil)
     }
     
