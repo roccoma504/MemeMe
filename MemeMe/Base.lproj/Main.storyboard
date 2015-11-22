@@ -146,7 +146,7 @@
             </objects>
             <point key="canvasLocation" x="1784" y="2569"/>
         </scene>
-        <!--Meme Editor View Controller-->
+        <!--Meme Editor-->
         <scene sceneID="QCG-eP-lQH">
             <objects>
                 <viewController id="7Dv-6j-jna" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -239,7 +239,7 @@
                             <constraint firstItem="hcS-Qc-Xq9" firstAttribute="top" secondItem="qmS-kx-bVt" secondAttribute="bottom" constant="-44" id="yCu-MF-5In"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uFB-0U-tM8">
+                    <navigationItem key="navigationItem" title="Meme Editor" id="uFB-0U-tM8">
                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="XCY-iQ-y7w">
                             <connections>
                                 <action selector="actionButtonPress:" destination="7Dv-6j-jna" id="Gk1-e8-lbJ"/>
@@ -324,7 +324,7 @@
             </objects>
             <point key="canvasLocation" x="1068" y="2569"/>
         </scene>
-        <!--Meme Detail View Controller-->
+        <!--Meme Detail-->
         <scene sceneID="fBb-Cg-QXp">
             <objects>
                 <viewController id="KRt-Be-neJ" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -350,7 +350,7 @@
                             <constraint firstItem="po7-P6-MP7" firstAttribute="top" secondItem="hV4-DJ-sOp" secondAttribute="bottom" id="zde-cT-f88"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="xa1-36-spl"/>
+                    <navigationItem key="navigationItem" title="Meme Detail" id="xa1-36-spl"/>
                     <connections>
                         <outlet property="memeImage" destination="po7-P6-MP7" id="IFS-xM-fth"/>
                     </connections>

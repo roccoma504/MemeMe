@@ -112,7 +112,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Defines a function that returns UIImage with the UILabels embeded in int.
     func generatememeObject() -> UIImage {
-        
         // Hide toolbar and navbar.
         self.navigationController?.navigationBar.hidden = true;
         self.toolbar.hidden = true;
@@ -120,7 +119,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
-        
         let snapShotMeme : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -133,7 +131,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Save the meme obeject locally and push it to the array.
     func generateMeme() {
-        memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!, originalImage: memeImage.image!, memedImage: self.generatememeObject())
+        memeObject.saveMeme(self.topLabel.text!, bottomText: self.bottomLabel.text!,
+            originalImage: memeImage.image!, memedImage: self.generatememeObject())
         receivedMemeArray.append(memeObject.getMeme())
     }
     
@@ -155,13 +154,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Define a function that launches the actionview.
     // The actionview is passed the meme to be shared.
     @IBAction func actionButtonPress(sender: AnyObject) {
-        
         // Generate the meme.
         generateMeme()
         
         // Push the image to the activity view so when the user shares,
         // the correct image is used.
-        let controller = UIActivityViewController(activityItems: [memeObject.getMeme().memeImaged], applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems:
+            [memeObject.getMeme().memeImaged], applicationActivities: nil)
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
@@ -175,7 +174,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Defines a function that is called when the user picks an image.
     // If the image is good set it to the image view and enable the share
     // button. Dismiss the view either way.
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
+    func imagePickerController(picker: UIImagePickerController!,
+        didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
         if let selectedImage : UIImage = image {
             memeImage.image = selectedImage
             memeImage.contentMode = .ScaleAspectFill
@@ -193,7 +193,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Defines a function that is invoked when the cancel button is pressed.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         // If the user has successfully picked an image then pass the data.
         // If we dont check this here the app will crash.
         if (segue.identifier == "cancelPressSegue" && memeImage.image != nil)
