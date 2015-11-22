@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// Defines a class of a single meme. Contains all attributes of a meme
+// plus the combined image.
 class MemeObject: NSObject {
     
     // Define object elements.
@@ -21,6 +23,7 @@ class MemeObject: NSObject {
         super.init()
     }
     
+    // Defines a function to save the meme.
     func saveMeme (topText: String, bottomText: String, originalImage: UIImage, memedImage: UIImage) {
         self.topText = topText
         self.bottomText = bottomText
@@ -28,6 +31,7 @@ class MemeObject: NSObject {
         self.memeImaged = memedImage
     }
     
+    // Defines a gunction to retrieve the meme.
     func getMeme() -> MemeObject {
         return self
     }

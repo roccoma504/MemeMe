@@ -111,7 +111,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eDe-8m-rxj">
-                                            <rect key="frame" x="3" y="2" width="95" height="95"/>
+                                            <rect key="frame" x="2" y="2" width="96" height="96"/>
                                             <animations/>
                                         </imageView>
                                     </subviews>
@@ -121,9 +121,11 @@
                                 <animations/>
                                 <constraints>
                                     <constraint firstItem="eDe-8m-rxj" firstAttribute="top" secondItem="amk-yw-9F6" secondAttribute="topMargin" constant="-6" id="2mw-tB-Cme"/>
-                                    <constraint firstItem="eDe-8m-rxj" firstAttribute="leading" secondItem="amk-yw-9F6" secondAttribute="leadingMargin" constant="-5" id="gKJ-lt-EZj"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="eDe-8m-rxj" secondAttribute="bottom" constant="-6" id="BzB-2m-NAA"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="eDe-8m-rxj" secondAttribute="trailing" constant="-6" id="NTX-0s-wHc"/>
+                                    <constraint firstItem="eDe-8m-rxj" firstAttribute="leading" secondItem="amk-yw-9F6" secondAttribute="leadingMargin" constant="-6" id="gKJ-lt-EZj"/>
                                     <constraint firstItem="eDe-8m-rxj" firstAttribute="centerY" secondItem="amk-yw-9F6" secondAttribute="centerY" id="ib2-uZ-c8R"/>
-                                    <constraint firstItem="eDe-8m-rxj" firstAttribute="centerX" secondItem="amk-yw-9F6" secondAttribute="centerX" constant="1" id="w7a-eh-naG"/>
+                                    <constraint firstItem="eDe-8m-rxj" firstAttribute="centerX" secondItem="amk-yw-9F6" secondAttribute="centerX" id="w7a-eh-naG"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="memeImage" destination="eDe-8m-rxj" id="FSO-vc-Yf1"/>

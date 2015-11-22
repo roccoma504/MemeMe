@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Defines a class that is used to display a fully developed meme in the
+// details view.
 class MemeDetailViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var memeImage: UIImageView!

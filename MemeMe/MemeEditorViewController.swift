@@ -17,6 +17,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topLabel: UITextField!
     @IBOutlet weak var bottomLabel: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
+    
     // Variables.
     
     // Defines an image picker for use by the photo picking functions.
@@ -24,16 +25,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Defines a memeobject.
     private var memeObject = MemeObject()
-
+    
     // Define an array of meme objects.
     var receivedMemeArray : Array <MemeObject> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Establish listeners for detecting when the keyboard hides and shows.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
+        //Looks for single or multiple taps to dismiss a text field.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+
         // Set the delegates.
         imagePicker.delegate = self
         topLabel.delegate = self
@@ -53,7 +59,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.bottomLabel.autocorrectionType = defaultLabel.correction
         self.bottomLabel.font = defaultLabel.font
         self.bottomLabel.textColor = defaultLabel.color
-
+        
         // Set the enabled status of the camera button to the
         // availability of the device's camera.
         self.cameraButton.enabled = UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType .Camera)
@@ -63,11 +69,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Set up UI background color.
         self.view.backgroundColor = UIColor .grayColor()
-        
-        //Looks for single or multiple taps to dismiss a text field.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
-        
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -78,8 +79,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     //# MARK Text field subprograms.
     
+    // When the keyboard is dismissed end the editing on the field.
     func dismissKeyboard() {
-        // Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
@@ -89,6 +90,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return true
     }
     
+    // When the keyboard shows move the view up the height of the keyboard.
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if self.bottomLabel.editing {
@@ -97,6 +99,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
     
+    // When the keyboard shows move the view down the height of the keyboard.
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if self.bottomLabel.editing {
@@ -107,8 +110,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     //#MARK Meme subprograms
     
-    // Defines a function that returns UIImage with the
-    // UILabels embeded in int.
+    // Defines a function that returns UIImage with the UILabels embeded in int.
     func generatememeObject() -> UIImage {
         
         // Hide toolbar and navbar.
@@ -165,7 +167,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Defines a function that is invoked when the cancel button is pressed.
     @IBAction func cancelButtonPress(sender: AnyObject) {
-            self.performSegueWithIdentifier("cancelPressSegue", sender: nil)
+        self.performSegueWithIdentifier("cancelPressSegue", sender: nil)
     }
     
     //# MARK: Image picker functions.
@@ -191,7 +193,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Defines a function that is invoked when the cancel button is pressed.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-                
+        
         // If the user has successfully picked an image then pass the data.
         // If we dont check this here the app will crash.
         if (segue.identifier == "cancelPressSegue" && memeImage.image != nil)

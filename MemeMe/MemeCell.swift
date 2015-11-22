@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Defines a class used by the collection view to populate the cells.
 class MemeCell: UICollectionViewCell {
 
     @IBOutlet weak var memeImage: UIImageView!

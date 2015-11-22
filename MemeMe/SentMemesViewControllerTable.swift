@@ -10,7 +10,6 @@ import UIKit
 
 class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     // IBOutlets.
     @IBOutlet weak var memeTable: UITableView!
     
@@ -40,68 +39,58 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         // memes are added so we want to pass the data here.
         let collectionNavViewController = navControllers![1] as! UINavigationController
         let collectionViewController = collectionNavViewController.viewControllers[0] as! SentMemesViewControllerCollection
-        
         collectionViewController.receivedMemeArray = receivedMemeArray
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //#MARK UITable subprograms
     
+    // Returns the number of sections in the table.
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
+    // Defines the number of cells in the section, this scales depending on
+    // the number of memes.    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return receivedMemeArray.count
     }
     
+    // Define the cell.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
         let row = indexPath.row
         
-                if let memeImage = self.view.viewWithTag(1) as? UIImageView {
-                    memeImage.image = receivedMemeArray[row].memeImaged
-                }
-        
-                if let topLabel = self.view.viewWithTag(2) as? UILabel {
-                    topLabel.text = receivedMemeArray[row].topText
-                }
-        
-                if let botLabel = self.view.viewWithTag(3) as? UILabel {
-                    botLabel.text = receivedMemeArray[row].bottomText
-                }
-        
+        // Here we check to ensure that each element of the cell is non nil.
+        // If the particular element is good, set it to the portion of the cell.
+        if let memeImage = self.view.viewWithTag(1) as? UIImageView {
+            memeImage.image = receivedMemeArray[row].memeImaged
+        }
+        if let topLabel = self.view.viewWithTag(2) as? UILabel {
+            topLabel.text = receivedMemeArray[row].topText
+        }
+        if let botLabel = self.view.viewWithTag(3) as? UILabel {
+            botLabel.text = receivedMemeArray[row].bottomText
+        }
         return cell
     }
     
+    // When the cell is chosen segue to the detil view.
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
         detailMemeImage = receivedMemeArray[indexPath.row].memeImaged
-        
         self.performSegueWithIdentifier("tableToDetailSegue", sender: nil)
-
     }
     
+    // Prepare the data for segue.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         // If the user has successfully picked an image then pass the data.
         // If we dont check this here the app will crash.
-        if (segue.identifier == "tableAddSegue")
-        {
+        if (segue.identifier == "tableAddSegue") {
             let navigationController = segue.destinationViewController as! UINavigationController
             let destView = navigationController.viewControllers[0] as! MemeEditorViewController
             destView.receivedMemeArray = receivedMemeArray
         }
-        
-        else if (segue.identifier == "tableToDetailSegue")
-        {
+        else if (segue.identifier == "tableToDetailSegue") {
             let detailVC:MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
             detailVC.receivedMemeImage = detailMemeImage
         }
