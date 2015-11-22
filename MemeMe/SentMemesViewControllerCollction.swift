@@ -48,9 +48,9 @@ class SentMemesViewControllerCollection: UICollectionViewController {
     // Configures and returns the cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MemeCell
-        let memeImage = memeForIndexPath(indexPath)
+        let cellMemeImage = memeForIndexPath(indexPath)
         cell.backgroundColor = UIColor.grayColor()
-        cell.memeImage.image = memeImage
+        cell.memeImage.image = cellMemeImage
         return cell
     }
     
@@ -63,8 +63,7 @@ class SentMemesViewControllerCollection: UICollectionViewController {
     
     // Prepare the data when the segue occurs.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "collectionToDetailSegue")
-        {
+        if (segue.identifier == "collectionToDetailSegue") {
             let detailVC:MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
             detailVC.receivedMemeImage = detailMemeImage
         }

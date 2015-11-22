@@ -82,11 +82,11 @@
 				39192FB41BFC07AE0040BEB4 /* Info.plist */,
 				39192FB11BFC07AE0040BEB4 /* LaunchScreen.storyboard */,
 				39192FA91BFC07AE0040BEB4 /* Main.storyboard */,
+				3908A6861BFD4E3600FE9367 /* Meme.swift */,
 				3908A6911C013E3B00FE9367 /* MemeCell.swift */,
 				39192FBC1BFC0E400040BEB4 /* MemeDetailViewController.swift */,
 				39192FBA1BFC0DD20040BEB4 /* MemeEditorViewController.swift */,
 				39192FAC1BFC07AE0040BEB4 /* MemeMe.xcdatamodeld */,
-				3908A6861BFD4E3600FE9367 /* Meme.swift */,
 				3908A6821BFD326900FE9367 /* SentMemesViewControllerCollction.swift */,
 				39192FA71BFC07AE0040BEB4 /* SentMemesViewControllerTable.swift */,
 			);

@@ -27,7 +27,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     private var memeObject = Meme()
     
     // Define an array of meme objects.
-    var receivedMemeArray : Array <Meme> = []
+    var newSentMemeArray : Array <Meme> = []
     
     // Defines a variable that the memed image is stored in.
     private var savedMemeImage : UIImage!
@@ -139,7 +139,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         //Create the meme
         let meme = Meme(topText:topTextField.text!, bottomText : bottomTextField.text!,
             originalImage: memeImage.image!, memedImage : snapShotMeme)
-        receivedMemeArray.append(meme)
+        newSentMemeArray.append(meme)
     }
     
     //#MARK IBActions
@@ -220,7 +220,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let tabBarController = segue.destinationViewController as! UITabBarController
             let navigationController = tabBarController.viewControllers![0] as! UINavigationController
             let destView = navigationController.viewControllers[0] as! SentMemesViewControllerTable
-            destView.receivedMemeArray = receivedMemeArray
+            destView.receivedMemeArray = newSentMemeArray
         }
     }
 }
