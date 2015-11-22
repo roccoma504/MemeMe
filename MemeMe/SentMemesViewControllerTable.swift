@@ -14,12 +14,14 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
     // IBOutlets.
     @IBOutlet weak var memeTable: UITableView!
     
+    // Define the cell identifier for filling the table cells.
+    private let textCellIdentifier = "tableCell"
     
-    let textCellIdentifier = "tableCell"
+    // Defines a single meme image.
+    private var detailMemeImage : UIImage!
     
+    // Defines an array that contains all of the users memes.
     var receivedMemeArray : Array <MemeObject> = []
-    
-    var detailMemeImage : UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,20 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
         // Set delegates.
         memeTable.delegate = self
         memeTable.dataSource = self
+        
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        // Define a constant of all of the tabs embeded in the tab bar controller.
+        let navControllers = self.tabBarController?.viewControllers
+        
+        // Define a constant of the collection view and pass the array
+        // of memes to it. This table view is the first one to appear after
+        // memes are added so we want to pass the data here.
+        let collectionNavViewController = navControllers![1] as! UINavigationController
+        let collectionViewController = collectionNavViewController.viewControllers[0] as! SentMemesViewControllerCollection
+        
+        collectionViewController.receivedMemeArray = receivedMemeArray
         
     }
     
@@ -84,7 +100,6 @@ class SentMemesViewControllerTable: UIViewController, UITableViewDelegate, UITab
             let navigationController = segue.destinationViewController as! UINavigationController
             let destView = navigationController.viewControllers[0] as! MemeEditorViewController
             destView.receivedMemeArray = receivedMemeArray
-
         }
         
         else if (segue.identifier == "tableToDetailSegue")

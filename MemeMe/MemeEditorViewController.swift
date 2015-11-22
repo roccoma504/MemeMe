@@ -16,19 +16,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var activityButton: UIBarButtonItem!
     @IBOutlet weak var topLabel: UITextField!
     @IBOutlet weak var bottomLabel: UITextField!
-    
     @IBOutlet weak var toolbar: UIToolbar!
     // Variables.
     
     // Defines an image picker for use by the photo picking functions.
-    var imagePicker = UIImagePickerController()
+    private var imagePicker = UIImagePickerController()
     
     // Defines a memeobject.
-    var memeObject = MemeObject()
-    
+    private var memeObject = MemeObject()
+
+    // Define an array of meme objects.
     var receivedMemeArray : Array <MemeObject> = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
