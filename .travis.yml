@@ -1,0 +1,10 @@
+language: objective-c
+
+branches:
+ only:
+ - master
+
+osx_image: xcode7.1
+xcode_sdk: iphonesimulator9.1 
+
+script: xcodebuild -sdk iphonesimulator9.1 build clean test -enableCodeCoverage YES -project MemeMe.xcodeproj CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
